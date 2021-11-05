@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SberSchoolLesson28HWK</string>
-    <string name="init_data">Init data</string>
+    <string name="add_book">Add book</string>
+    <string name="delete_books">Delete books</string>
     <string name="shelves">Полка:</string>
     <string name="isbn_label">ISBN:</string>
 </resources>

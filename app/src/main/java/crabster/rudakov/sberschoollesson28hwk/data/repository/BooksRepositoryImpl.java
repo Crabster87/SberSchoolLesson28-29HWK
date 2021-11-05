@@ -20,14 +20,14 @@ public class BooksRepositoryImpl implements BooksRepository {
     }
 
     @Override
-    public void addBook() {
+    public void addBook(String isbn, String title, String author, int shelfNumber) {
         SQLiteDatabase sqLiteDatabase = mHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(BooksDbContract.BooksEntry.ISBN, "978-3-16-148410-0");
-        values.put(BooksDbContract.BooksEntry.TITLE, "Our life is a pain");
-        values.put(BooksDbContract.BooksEntry.AUTHOR, "John Doe");
-        values.put(BooksDbContract.BooksEntry.SHELF_NUMBER, 13);
+        values.put(BooksDbContract.BooksEntry.ISBN, isbn);
+        values.put(BooksDbContract.BooksEntry.TITLE, title);
+        values.put(BooksDbContract.BooksEntry.AUTHOR, author);
+        values.put(BooksDbContract.BooksEntry.SHELF_NUMBER, shelfNumber);
 
         sqLiteDatabase.insert(BooksDbContract.DB_TABLE_NAME, null, values);
     }
@@ -45,7 +45,7 @@ public class BooksRepositoryImpl implements BooksRepository {
 
         List<Book> books = new ArrayList<>();
         try (Cursor cursor = sqLiteDatabase.query(
-                BooksDbContract.DB_TABLE_NAME, columns, null, null, null, null, null)){
+                BooksDbContract.DB_TABLE_NAME, columns, null, null, null, null, null)) {
             while (cursor.moveToNext()) {
                 books.add(new Book(
                         cursor.getLong(cursor.getColumnIndexOrThrow(BooksDbContract.BooksEntry._ID)),
@@ -56,6 +56,11 @@ public class BooksRepositoryImpl implements BooksRepository {
             }
         }
         return books;
+    }
+
+    @Override
+    public void deleteBooks() {
+        mHelper.onCleanTable();
     }
 
 }

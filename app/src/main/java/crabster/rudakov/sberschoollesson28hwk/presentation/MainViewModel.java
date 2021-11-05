@@ -34,6 +34,22 @@ public class MainViewModel extends ViewModel {
         return mBooksData;
     }
 
+    public void addBooksData() {
+        mExecutor.submit(() -> {
+            mInteractor.addSingleBook();
+            List<Book> books = mInteractor.getBooks();
+            mBooksData.postValue(books);
+        });
+    }
+
+    public void deleteBooksData() {
+        mExecutor.submit(() -> {
+            mInteractor.deleteAllBooks();
+            List<Book> books = mInteractor.getBooks();
+            mBooksData.postValue(books);
+        });
+    }
+
     private void initBooksData() {
         mExecutor.submit(() -> {
             List<Book> books = mInteractor.getBooks();

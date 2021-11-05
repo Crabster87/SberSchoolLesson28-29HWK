@@ -43,4 +43,9 @@ public class BookDbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void onCleanTable() {
+        String queryString = String.format("DELETE FROM %s", BooksDbContract.DB_TABLE_NAME);
+        getWritableDatabase().execSQL(queryString);
+    }
+
 }

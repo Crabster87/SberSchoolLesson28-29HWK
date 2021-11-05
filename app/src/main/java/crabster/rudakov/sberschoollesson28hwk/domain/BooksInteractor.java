@@ -1,6 +1,6 @@
 package crabster.rudakov.sberschoollesson28hwk.domain;
 
-import java.util.List;
+import java.util.*;
 
 import crabster.rudakov.sberschoollesson28hwk.domain.model.Book;
 
@@ -12,9 +12,16 @@ public class BooksInteractor {
         mRepository = repository;
     }
 
+    public void addSingleBook() {
+        mRepository.addBook("978-3-16-148410-0", "Our life is a pain", "John Doe", 13);
+    }
+
     public List<Book> getBooks() {
-        mRepository.addBook();
         return mRepository.books();
+    }
+
+    public void deleteAllBooks() {
+        mRepository.deleteBooks();
     }
 
 }
