@@ -1,4 +1,4 @@
-package crabster.rudakov.sberschoollesson28hwk.data.repository;
+package crabster.rudakov.sberschoollesson28hwk.data.sqlite.repository;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.*;
 
-import crabster.rudakov.sberschoollesson28hwk.data.database.BookDbHelper;
-import crabster.rudakov.sberschoollesson28hwk.data.entity.BooksDbContract;
+import crabster.rudakov.sberschoollesson28hwk.data.sqlite.database.BookDbHelper;
+import crabster.rudakov.sberschoollesson28hwk.data.sqlite.entity.BooksDbContract;
 import crabster.rudakov.sberschoollesson28hwk.domain.model.Book;
 import crabster.rudakov.sberschoollesson28hwk.domain.BooksRepository;
 
@@ -60,7 +60,8 @@ public class BooksRepositoryImpl implements BooksRepository {
 
     @Override
     public void deleteBooks() {
-        mHelper.onCleanTable();
+        SQLiteDatabase sqLiteDatabase = mHelper.getWritableDatabase();
+        mHelper.onCleanTable(sqLiteDatabase);
     }
 
 }

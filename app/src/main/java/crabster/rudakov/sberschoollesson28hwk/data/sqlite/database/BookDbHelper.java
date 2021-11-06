@@ -1,4 +1,4 @@
-package crabster.rudakov.sberschoollesson28hwk.data.database;
+package crabster.rudakov.sberschoollesson28hwk.data.sqlite.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import crabster.rudakov.sberschoollesson28hwk.data.entity.BooksDbContract;
+import crabster.rudakov.sberschoollesson28hwk.data.sqlite.entity.BooksDbContract;
 
 public class BookDbHelper extends SQLiteOpenHelper {
 
@@ -43,9 +43,13 @@ public class BookDbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void onCleanTable() {
-        String queryString = String.format("DELETE FROM %s", BooksDbContract.DB_TABLE_NAME);
-        getWritableDatabase().execSQL(queryString);
+    public void onCleanTable(SQLiteDatabase sqLiteDatabase) {
+        String clearTableQuery = String.format("DELETE FROM %s", BooksDbContract.DB_TABLE_NAME);
+        sqLiteDatabase.execSQL(clearTableQuery);
+        String resetPrimaryKeyQuery = String.format("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '%s'",
+                BooksDbContract.DB_TABLE_NAME);
+        sqLiteDatabase.execSQL(resetPrimaryKeyQuery);
+        sqLiteDatabase.execSQL("VACUUM");
     }
 
 }

@@ -1,4 +1,4 @@
-package crabster.rudakov.sberschoollesson28hwk.data.entity;
+package crabster.rudakov.sberschoollesson28hwk.data.sqlite.entity;
 
 import android.provider.BaseColumns;
 
